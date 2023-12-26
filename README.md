@@ -19,4 +19,4 @@
     ```
     ./run_server.sh
     ```
- 5. Server will be running here: [Server](http://127.0.0.1:9000)
+ 5. Server will be running here: [Server](http://127.0.0.1:9000/purchase/orders/)
