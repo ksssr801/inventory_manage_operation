@@ -1,66 +1,83 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
+from rest_framework.decorators import api_view
 from django.forms.models import model_to_dict
 import json
 from .models import *
+from .serializers import *
+from drf_spectacular.utils import (
+    extend_schema,
+)
+from drf_spectacular.types import OpenApiTypes
 
 
+@extend_schema(
+    request=PurchaseOrderSerializer,
+    description="This endpoint is used to add purchase order.",
+    summary="Add a new purchase order.",
+    responses=OpenApiTypes.OBJECT,
+)
+@api_view(("POST",))
 def create_purchase_order(request):
     try:
         print ("## create_purchase_order function ##")
-        if request.method == 'POST':
-            supplier_name = str(request.POST.get('supplier_name', ''))
-            supplier_email = str(request.POST.get('supplier_email', ''))
-            line_items = json.loads(request.POST.get('line_item_data', []))
+        supplier_name = str(request.POST.get('supplier_name', ''))
+        supplier_email = str(request.POST.get('supplier_email', ''))
+        line_items = json.loads(request.POST.get('line_item_data', []))
+        
+        new_supplier_obj = None
+        new_purchase_order_obj = None
+        new_line_item_obj = None
+        
+        try:
+            new_supplier_obj = Supplier(**{
+                'name': supplier_name, 
+                'email': supplier_email
+                })
+            new_supplier_obj.save()
+        except Exception as e:
+            print ("Error in creating new supplier: " + str(e))
             
-            new_supplier_obj = None
-            new_purchase_order_obj = None
-            new_line_item_obj = None
-            
-            try:
-                new_supplier_obj = Supplier(**{
-                    'name': supplier_name, 
-                    'email': supplier_email
+        
+        try:
+            new_purchase_order_obj = PurchaseOrder(**{
+                'supplier': new_supplier_obj,
+                'total_quantity': 1,
+                'total_amount': 10.50,
+                'total_tax': 0.50
+                })
+            new_purchase_order_obj.save()
+        except Exception as e:
+            print ("Error in creating new purchase order: " + str(e))
+        
+        try:
+            for line_item in line_items: 
+                price_without_tax = float(line_item.get('price_without_tax', 0))
+                tax_amount = float(line_item.get('tax_amount', 0))
+                new_line_item_obj = LineItem(**{
+                    'purchase_order': new_purchase_order_obj, 
+                    'item_name': str(line_item.get('item_name', '')),
+                    'quantity': int(line_item.get('quantity', '')),
+                    'tax_name': str(line_item.get('tax_name', '')),
+                    'price_without_tax': price_without_tax,
+                    'tax_amount': tax_amount,
+                    'line_total': price_without_tax + tax_amount,
                     })
-                new_supplier_obj.save()
-            except Exception as e:
-                print ("Error in creating new supplier: " + str(e))
-                
-            
-            try:
-                new_purchase_order_obj = PurchaseOrder(**{
-                    'supplier': new_supplier_obj,
-                    'total_quantity': 1,
-                    'total_amount': 10.50,
-                    'total_tax': 0.50
-                    })
-                new_purchase_order_obj.save()
-            except Exception as e:
-                print ("Error in creating new purchase order: " + str(e))
-            
-            try:
-                for line_item in line_items: 
-                    price_without_tax = float(line_item.get('price_without_tax', 0))
-                    tax_amount = float(line_item.get('tax_amount', 0))
-                    new_line_item_obj = LineItem(**{
-                        'purchase_order': new_purchase_order_obj, 
-                        'item_name': str(line_item.get('item_name', '')),
-                        'quantity': int(line_item.get('quantity', '')),
-                        'tax_name': str(line_item.get('tax_name', '')),
-                        'price_without_tax': price_without_tax,
-                        'tax_amount': tax_amount,
-                        'line_total': price_without_tax + tax_amount,
-                        })
-                    print ("new_line_item_obj : ", new_line_item_obj)
-                    new_line_item_obj.save()
-            except Exception as e:
-                print ("Error in creating new line item: " + str(e))
-            
-            return redirect('/purchase/orders/')
-        return render(request, 'create_purchase_order.html', context={ 'msg': '' })
+                print ("new_line_item_obj : ", new_line_item_obj)
+                new_line_item_obj.save()
+        except Exception as e:
+            print ("Error in creating new line item: " + str(e))
+        
+        return redirect('/purchase/orders/')
     except Exception as e:
         print ("e : ", e)
-        return render(request, 'create_purchase_order.html', context={ 'msg': 'Some error occured.' })
-        
+    
+def get_add_purchase_order_form(request):
+    try:
+        print ("## get_add_purchase_order_form function ##")        
+        return render(request, 'create_purchase_order.html', context={ 'msg': '' })
+    except Exception as e:
+        pass
+
 def get_all_purchase_orders(request):
     try:
         print ("## get_all_purchase_orders ##")

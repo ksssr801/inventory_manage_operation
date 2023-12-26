@@ -21,3 +21,5 @@
     ./run_server.sh
     ```
  5. Server will be running here: [Server](http://127.0.0.1:9000/purchase/orders/)
+ 6. `drf-spectacular` has been integrated for Purchase Order model. For accessing the spectacular docs. Check here: [Spectacular Docs](http://127.0.0.1:9000/docs/). It is very light version, may not work. But we can get the idea of the API.
+

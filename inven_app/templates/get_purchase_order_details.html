@@ -40,14 +40,14 @@
 
       <a
         class="btn btn-primary btn-sm mt-3"
-        href="{% url 'new-purchase-order' %}"
+        href="{% url 'new-purchase-order-form' %}"
         role="button"
         >Create New Order</a
       >
 
       <!-- <button class="btn btn-primary btn-sm mt-3">Create New Order</button> -->
       <button class="btn mt-3">
-        <a href="/purchase/orders/">All Purchase Orders</a>
+        <a href="{% url 'purchase-orders' %}">All Purchase Orders</a>
       </button>
     </div>
 
