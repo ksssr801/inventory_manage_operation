@@ -1,5 +1,6 @@
 # sum_tracker_test
 
+> Tech Stack: Django and PostgreSQL.
 > Sys Specs: OS need to be Linux or MAC with Python3 installed.
 
 > Steps to run the app:
