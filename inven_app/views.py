@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 from django.forms.models import model_to_dict
-import json
-from .models import *
-from .serializers import *
+from rest_framework import status
+from rest_framework.response import Response
 from drf_spectacular.utils import (
     extend_schema,
 )
 from drf_spectacular.types import OpenApiTypes
+import json
+
+from .models import *
+from .serializers import *
 
 
 @extend_schema(
@@ -78,9 +81,9 @@ def get_add_purchase_order_form(request):
     except Exception as e:
         pass
 
-def get_all_purchase_orders(request):
+def get_all_purchase_order_template(request):
     try:
-        print ("## get_all_purchase_orders ##")
+        print ("## get_all_purchase_order_template ##")
         purchase_orders = PurchaseOrder.objects.filter(is_deleted=False).select_related('supplier').prefetch_related('purchase_order_ref').all()
         
         result = [] 
@@ -100,6 +103,34 @@ def get_all_purchase_orders(request):
     except Exception as e:
         print ("e : ", e)
         return render(request, 'get_all_purchase_orders.html', context={ 'msg': 'Some error occured.' })
+
+@extend_schema(
+    description="This endpoint is used to get all purchase orders.",
+    summary="List all purchase orders.",
+)
+@api_view(("GET",))
+def get_all_purchase_response(request):
+    try:
+        print ("## get_all_purchase_response ##")
+        purchase_orders = PurchaseOrder.objects.filter(is_deleted=False).select_related('supplier').prefetch_related('purchase_order_ref').all()
+        
+        result = [] 
+        for order in purchase_orders:
+            purchase_order_dict = model_to_dict(order)
+            purchase_order_dict['supplier'] = model_to_dict(order.supplier)
+
+            line_item_dict_list = []
+            for line_item in order.purchase_order_ref.all():
+                line_item_dict = model_to_dict(line_item)
+                line_item_dict_list.append(line_item_dict)
+                
+            purchase_order_dict['line_items'] = line_item_dict_list
+            result.append(purchase_order_dict)
+            
+        return Response(result, status=status.HTTP_200_OK)
+    except Exception as e:
+        print ("e : ", e)
+        return Response([], status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def get_purchase_order_details(request, order_number=None):
     try:
