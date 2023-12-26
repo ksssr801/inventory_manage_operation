@@ -13,7 +13,12 @@
     />
   </head>
   <body class="container mt-5">
-    <h1>All Purchase Orders</h1>
+    <h1>
+      All Purchase Orders
+      <button class="btn btn-sm mt-3">
+        <a href="/docs/">Check Spectacular Docs</a>
+      </button>
+    </h1>
 
     <div class="table-responsive">
       <table class="table table-striped">
@@ -65,7 +70,9 @@
       </table>
       <div class="pt-2 pb-5">
         <button class="btn mt-3">
-          <a href="{% url 'new-purchase-order-form' %}">Create Purchase Order</a>
+          <a href="{% url 'new-purchase-order-form' %}"
+            >Create Purchase Order</a
+          >
         </button>
       </div>
     </div>

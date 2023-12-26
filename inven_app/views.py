@@ -105,8 +105,10 @@ def get_all_purchase_order_template(request):
         return render(request, 'get_all_purchase_orders.html', context={ 'msg': 'Some error occured.' })
 
 @extend_schema(
+    request=PurchaseOrderSerializer,    
     description="This endpoint is used to get all purchase orders.",
     summary="List all purchase orders.",
+    responses=OpenApiTypes.OBJECT,    
 )
 @api_view(("GET",))
 def get_all_purchase_response(request):
