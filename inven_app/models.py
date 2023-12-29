@@ -1,5 +1,5 @@
 from django.db import models
-from sumtracker_proj.base_models import BaseModel
+from djapi.base_models import BaseModel
 from django.db.models.deletion import CASCADE
 
 class Supplier(BaseModel):
