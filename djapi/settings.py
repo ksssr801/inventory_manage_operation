@@ -79,16 +79,16 @@ WSGI_APPLICATION = 'djapi.wsgi.application'
 
 # PostgresDB
 DATABASES = { 
-             'default': dj_database_url.config('postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2', conn_max_age=600)
+             'default': dj_database_url.parse('postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2', conn_max_age=600)
     }
 
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'inventory_db_4up2',
+#         'NAME': 'sum_track_db',
 #         'USER': 'sahas',
-#         'PASSWORD': 'VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN',
-#         'HOST': 'postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2',
+#         'PASSWORD': 'test123',
+#         'HOST': '127.0.0.1',
 #         'PORT': 5432,
 #     },
 # }
