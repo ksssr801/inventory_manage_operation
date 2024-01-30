@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,16 +78,20 @@ WSGI_APPLICATION = 'djapi.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 # PostgresDB
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'inventory_db_4up2',
-        'USER': 'sahas',
-        'PASSWORD': 'VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN',
-        'HOST': 'postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2',
-        'PORT': 5432,
-    },
-}
+DATABASES = { 
+             'default': dj_database_url.config('postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2', conn_max_age=600)
+    }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'inventory_db_4up2',
+#         'USER': 'sahas',
+#         'PASSWORD': 'VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN',
+#         'HOST': 'postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2',
+#         'PORT': 5432,
+#     },
+# }
 
 
 # Password validation
