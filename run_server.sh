@@ -4,7 +4,7 @@ INSTDIR="$( cd "$( dirname "${(%):-%N}" )" && pwd )"
 SOURCEDIR="$(dirname "$INSTDIR")"
 
 cd /opt
-source SumTrackerEnv/bin/activate
+source InvManageEnv/bin/activate
 cd $INSTDIR
 
 start() {

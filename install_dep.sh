@@ -9,14 +9,14 @@ echo $SOURCEDIR
 cd /opt
 
 # Create and activate virtual environment
-python3.11 -m venv SumTrackerEnv
-source SumTrackerEnv/bin/activate
+python3.11 -m venv InvManageEnv
+source InvManageEnv/bin/activate
 
 # Change ownership of the virtual environment to the current user
-sudo chown -R $USER:$USER /opt/SumTrackerEnv/
+sudo chown -R $USER:$USER /opt/InvManageEnv/
 
 cd $INSTDIR
-echo "Virtual environment (SumTrackerEnv) has been created."
+echo "Virtual environment (InvManageEnv) has been created."
 echo ""
 echo "Installing the Python dependencies"
 pip install --upgrade pip
