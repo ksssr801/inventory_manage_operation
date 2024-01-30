@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'djapi.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sum_track_db',
+        'NAME': 'inventory_db_4up2',
         'USER': 'sahas',
-        'PASSWORD': 'test123',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN',
+        'HOST': 'postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2',
         'PORT': 5432,
     },
 }
