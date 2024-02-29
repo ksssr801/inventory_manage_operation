@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'djapi.wsgi.application'
 
 # PostgresDB
 DATABASES = { 
-             'default': dj_database_url.parse('postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2', conn_max_age=600)
+             'default': dj_database_url.parse('postgres://inventory_test_user:TTTZqstVPmFJLqigRtEHkzLcAf5zdawj@dpg-cng85jfsc6pc73enoou0-a.oregon-postgres.render.com/inventory_test', conn_max_age=600)
     }
 
 # DATABASES = {
