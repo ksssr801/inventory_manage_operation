@@ -1,4 +1,4 @@
-# sum_tracker_test
+# inventory_manage_operation
 
 > Tech Stack: Django and PostgreSQL.
 > Sys Specs: OS need to be Linux or MAC with Python3 installed.
