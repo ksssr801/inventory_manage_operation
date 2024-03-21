@@ -82,17 +82,23 @@ WSGI_APPLICATION = 'djapi.wsgi.application'
 #              'default': dj_database_url.parse('postgres://sahas:VDQfnQlgcqfAU3EWYnAn1z2RjpkIiTvN@dpg-cmsdtsed3nmc73ero2k0-a.oregon-postgres.render.com/inventory_db_4up2', conn_max_age=600)
 #     }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'sum_track_db',
+#         'USER': 'sahas',
+#         'PASSWORD': 'test123',
+#         'HOST': '127.0.0.1',
+#         'PORT': 5432,
+#     },
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sum_track_db',
-        'USER': 'sahas',
-        'PASSWORD': 'test123',
-        'HOST': '127.0.0.1',
-        'PORT': 5432,
-    },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
